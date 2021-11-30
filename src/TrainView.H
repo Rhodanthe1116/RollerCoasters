@@ -70,6 +70,10 @@ class TrainView : public Fl_Gl_Window
 		// cleared for you
 		void setProjection();
 
+		void drawTrack(bool doingShadows);
+
+		void drawTrain(bool doingShadows);
+
 		// Reset the Arc ball control
 		void resetArcball();
 
