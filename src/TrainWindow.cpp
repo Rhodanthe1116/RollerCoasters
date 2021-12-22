@@ -35,7 +35,7 @@
 #include "TrainView.H"
 #include "CallBacks.H"
 
-
+const Fl_Color SELECTION_COLOR = 128 + 6;
 
 //************************************************************************
 //
@@ -86,17 +86,17 @@ TrainWindow(const int x, const int y)
 		worldCam = new Fl_Button(605, pty, 60, 20, "World");
 		worldCam->type(FL_RADIO_BUTTON);		// radio button
 		worldCam->value(1);			// turned on
-		worldCam->selection_color((Fl_Color)3); // yellow when pressed
+		worldCam->selection_color(SELECTION_COLOR); // yellow when pressed
 		worldCam->callback((Fl_Callback*)damageCB, this);
 		trainCam = new Fl_Button(670, pty, 60, 20, "Train");
 		trainCam->type(FL_RADIO_BUTTON);
 		trainCam->value(0);
-		trainCam->selection_color((Fl_Color)3);
+		trainCam->selection_color(SELECTION_COLOR);
 		trainCam->callback((Fl_Callback*)damageCB, this);
 		topCam = new Fl_Button(735, pty, 60, 20, "Top");
 		topCam->type(FL_RADIO_BUTTON);
 		topCam->value(0);
-		topCam->selection_color((Fl_Color)3);
+		topCam->selection_color(SELECTION_COLOR);
 		topCam->callback((Fl_Callback*)damageCB, this);
 		camGroup->end();
 
@@ -147,6 +147,23 @@ TrainWindow(const int x, const int y)
 		makeExampleWidgets(this, pty);
 #endif
 
+		pty += 25;
+		groundScale = new Fl_Value_Slider(655, pty, 140, 20, "Precision");
+		groundScale->range(1, 1);
+		groundScale->value(1);
+		groundScale->align(FL_ALIGN_LEFT);
+		groundScale->type(FL_HORIZONTAL);
+		groundScale->step(1);
+
+		pty += 25;
+		waveLength = new Fl_Value_Slider(655, pty, 140, 20, "Wave Length");
+		waveLength->range(1, 20);
+		waveLength->value(10);
+		waveLength->align(FL_ALIGN_LEFT);
+		waveLength->type(FL_HORIZONTAL);
+		waveLength->step(1);
+
+
 		// we need to make a little phantom widget to have things resize correctly
 		Fl_Box* resizebox = new Fl_Box(600, 595, 200, 5);
 		widgets->resizable(resizebox);
@@ -169,7 +186,7 @@ togglify(Fl_Button* b, int val)
 {
 	b->type(FL_TOGGLE_BUTTON);		// toggle
 	b->value(val);		// turned off
-	b->selection_color((Fl_Color)3); // yellow when pressed	
+	b->selection_color(SELECTION_COLOR); // yellow when pressed	
 	b->callback((Fl_Callback*)damageCB, this);
 }
 

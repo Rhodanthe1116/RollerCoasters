@@ -1,15 +1,15 @@
 /************************************************************************
-     File:        3DUtils.H
+	 File:        3DUtils.H
 
-     Author:     
-                  Michael Gleicher, gleicher@cs.wisc.edu
-     Modifier
-                  Yu-Chi Lai, yu-chi@cs.wisc.edu
-     
-     Comment:     some useful routines for writing 3D interactive 
-					   programs written for CS638 - 
+	 Author:
+				  Michael Gleicher, gleicher@cs.wisc.edu
+	 Modifier
+				  Yu-Chi Lai, yu-chi@cs.wisc.edu
+
+	 Comment:     some useful routines for writing 3D interactive
+					   programs written for CS638 -
 						Michael Gleicher, November 1999
-                  re-written and expanded, October 2005
+				  re-written and expanded, October 2005
 
 						+ Routines to draw objects
 							- drawCube
@@ -17,13 +17,13 @@
 						+	Drop shadow code
 						+	MousePole code
 						+ Quick and Dirty Quaternions
-   
-	  Note:        The utilities in this file are meant to be 
-						an example for	CS559 students to refer to. please 
+
+	  Note:        The utilities in this file are meant to be
+						an example for	CS559 students to refer to. please
 						follow the course policy on
 						using example code!
 
-     Platform:    Visio Studio.Net 2003/2005
+	 Platform:    Visio Studio.Net 2003/2005
 
 *************************************************************************/
 #pragma once
@@ -41,6 +41,7 @@ typedef float HMatrix[4][4];
 //************************************************************************
 // Note: we pass the size of the cube. it gets drawn at the origin
 void drawCube(float x, float y, float z, float l);
+void drawCuboid(float x, float y, float z, float lx, float ly, float lz, float rx, float ry, float rz);
 
 //************************************************************************
 // draw a ground plane
@@ -56,18 +57,18 @@ extern float floorColor2[3];
 //       one size). the numSquares is the number of squares in each
 //       across an edge
 //************************************************************************
-void drawFloor(float size = 10, int nSquares = 8);
+void drawFloor(float size = 10, int nSquares = 8, int waveLength = 1);
 
 //************************************************************************
 // handy utility for turning lights on and off - it remembers what the
 // state of the lighting was (on or off) and smooth shading (on or off)
-typedef enum { 
-	on		=  1, 
-	off	= -1, 
-	keep	=  0 
+typedef enum {
+	on = 1,
+	off = -1,
+	keep = 0
 } LightOnOff;
 
-void setLighting(const LightOnOff lighting=keep, const LightOnOff smooth=keep);
+void setLighting(const LightOnOff lighting = keep, const LightOnOff smooth = keep);
 void restoreLighting();		// pop last state off the stack
 
 //************************************************************************
@@ -104,8 +105,8 @@ void unsetupShadows(void);
 // it is in 3D. of course, its not in one place, its a line
 // this function gets that ray for you (well, it gets 2 points on the line)
 int getMouseLine(double& p1x, double& p1y, double& p1z,
-								 double& p2x, double& p2y, double& p2z);
-			  
+	double& p2x, double& p2y, double& p2z);
+
 //************************************************************************
 //
 // * When you have a mouse line, you want to pick a point where you think the user 
@@ -122,11 +123,11 @@ int getMouseLine(double& p1x, double& p1y, double& p1z,
 //      b. r is the resulting position. it will share 1 of its coordinates
 //         with l, but will be on the line
 //************************************************************************
-void mousePoleGo( double r1x, double r1y, double r1z,
-									double r2x, double r2y, double r2z,
-									double lx, double ly, double lz, 
-									double &rx, double &ry, double &rz,
-									bool elevator);
+void mousePoleGo(double r1x, double r1y, double r1z,
+	double r2x, double r2y, double r2z,
+	double lx, double ly, double lz,
+	double& rx, double& ry, double& rz,
+	bool elevator);
 
 //************************************************************************
 // useful math
